@@ -56,9 +56,18 @@ const state = {};
 const levels = ['100-I', '100-II', '200-I', '200-II', '300-I', '300-II', '400-I', '400-II'];
 
 function init() {
-    materias.forEach(m => state[m.id] = 0);
+    const savedState = localStorage.getItem('mallaState');
+    if (savedState) {
+        Object.assign(state, JSON.parse(savedState));
+    } else {
+        materias.forEach(m => state[m.id] = 0);
+    }
     renderGrid();
     updateStates();
+}
+
+function saveState() {
+    localStorage.setItem('mallaState', JSON.stringify(state));
 }
 
 function getSubjectState(id) {
@@ -107,7 +116,10 @@ function updateStates() {
             planningCredits += m.credits;
         } else if (isLocked) {
             domEl.classList.add('state-locked');
-            if (state[m.id] === 1) state[m.id] = 0; 
+            if (state[m.id] === 1) {
+                state[m.id] = 0; 
+                saveState();
+            }
         } else {
             domEl.classList.add('state-available');
         }
@@ -123,18 +135,12 @@ function updateUI(credits, totalApproved) {
 
     credEl.innerText = credits;
     
-    if (credits === 0) {
-        msgEl.innerText = "Selecciona materias";
-        msgEl.className = "value status-neutral";
-    } else if (credits < 9) {
-        msgEl.innerText = "Insuficiente (< 9) - Pagas";
-        msgEl.className = "value status-error";
-    } else if (credits > 15) {
-        msgEl.innerText = "Exceso (> 15) - Revisar";
-        msgEl.className = "value status-warn";
-    } else {
-        msgEl.innerText = "Regular (Gratuidad)";
+    if (credits >= 9 && credits <= 15) {
+        msgEl.innerText = "Estudiante Regular";
         msgEl.className = "value status-ok";
+    } else {
+        msgEl.innerText = "Estudiante Irregular";
+        msgEl.className = "value status-error";
     }
 
     const percent = Math.round((totalApproved / materias.length) * 100);
@@ -154,6 +160,7 @@ function toggleMateria(id) {
     } else {
         state[id] = 0; 
     }
+    saveState();
     updateStates();
 }
 
