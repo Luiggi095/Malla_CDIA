@@ -28,66 +28,60 @@ body {
 
 header {
     background-color: #fff;
-    padding: 20px;
+    padding: 15px 20px;
     box-shadow: 0 2px 5px rgba(0,0,0,0.05);
     position: sticky;
     top: 0;
     z-index: 100;
+    border-bottom: 1px solid #ddd;
 }
 
 .header-content {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    flex-wrap: wrap;
-    max-width: 1400px;
+    max-width: 1800px;
     margin: 0 auto;
 }
 
 h1 {
-    font-size: 1.5rem;
+    font-size: 1.2rem;
     color: #2c3e50;
+    margin-right: 20px;
 }
 
 .stats-panel {
     display: flex;
-    gap: 20px;
+    gap: 15px;
 }
 
 .stat-box {
     background: #f8f9fa;
-    padding: 10px 15px;
-    border-radius: 8px;
+    padding: 5px 10px;
+    border-radius: 6px;
     border: 1px solid #ddd;
+    display: flex;
+    align-items: center;
+    gap: 8px;
 }
 
-.label {
-    font-size: 0.8rem;
-    color: #666;
-    display: block;
-}
-
-.value {
-    font-weight: bold;
-    font-size: 1.1rem;
-}
-
+.label { font-size: 0.75rem; color: #666; }
+.value { font-weight: bold; font-size: 0.9rem; }
 .status-ok { color: var(--success-color); }
 .status-warn { color: var(--warning-color); }
 .status-error { color: var(--danger-color); }
-.status-neutral { color: #666; }
 
 .legend {
-    margin-top: 15px;
+    margin-top: 10px;
     display: flex;
     gap: 15px;
     justify-content: center;
-    font-size: 0.9rem;
+    font-size: 0.8rem;
 }
 
 .dot {
-    height: 12px;
-    width: 12px;
+    height: 10px;
+    width: 10px;
     border-radius: 50%;
     display: inline-block;
     margin-right: 5px;
@@ -98,104 +92,115 @@ h1 {
 .dot.planned { background-color: var(--planned-bg); border: 1px solid var(--planned-border); }
 .dot.passed { background-color: var(--passed-bg); border: 1px solid var(--passed-border); }
 
+/* CONTENEDOR PRINCIPAL VERTICAL */
 #grid-container {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); 
-    gap: 20px;
-    padding: 20px;
-    max-width: 1600px;
-    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 20px; /* Espacio entre niveles */
+    padding: 30px;
+    max-width: 100%;
+    overflow-x: auto; /* Scroll horizontal si la pantalla es muy pequeña */
 }
 
-.semester-column {
+/* FILA DE NIVEL */
+.level-row {
+    display: flex;
+    align-items: stretch; /* Estirar altura */
     background: transparent;
+    border-bottom: 1px dashed #d1d1d1;
+    padding-bottom: 20px;
 }
 
-.semester-title {
-    font-size: 1rem;
-    margin-bottom: 10px;
+/* ENCABEZADO LATERAL (NIVEL 100-I) */
+.level-header {
+    width: 120px;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    font-weight: bold;
     color: #555;
+    font-size: 1rem;
     text-transform: uppercase;
-    letter-spacing: 1px;
-    border-bottom: 2px solid #ddd;
-    padding-bottom: 5px;
+    padding-right: 20px;
+    border-right: 3px solid #eee;
+    margin-right: 20px;
+}
+
+/* GRUPO DE MATERIAS (HORIZONTAL) */
+.materias-group {
+    display: flex;
+    flex-wrap: wrap; /* Permitir que bajen si no caben en pantalla ancha */
+    gap: 15px;
+    flex-grow: 1;
+    align-items: center;
 }
 
 .materia-card {
     background: var(--card-bg);
     border: 1px solid var(--available-border);
-    border-radius: 8px;
-    padding: 15px;
-    margin-bottom: 10px;
+    border-radius: 6px;
+    padding: 10px;
+    width: 180px; /* Ancho fijo más compacto para parecerse al diagrama */
+    min-height: 110px;
     cursor: pointer;
     transition: all 0.2s ease;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
     position: relative;
-    user-select: none;
 }
 
 .materia-card:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    transform: translateY(-3px);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+    z-index: 10;
 }
 
 .materia-header {
     display: flex;
     justify-content: space-between;
     margin-bottom: 5px;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 3px;
 }
 
-.code {
-    font-size: 0.75rem;
-    color: #888;
-    font-weight: bold;
-}
-
-.credits {
-    font-size: 0.75rem;
-    background: #eee;
-    padding: 2px 6px;
-    border-radius: 4px;
-}
+.code { font-size: 0.65rem; color: #888; font-weight: bold; }
+.credits { font-size: 0.65rem; background: #eee; padding: 1px 4px; border-radius: 3px; }
 
 .materia-name {
-    font-size: 0.95rem;
+    font-size: 0.8rem;
     font-weight: 600;
-    line-height: 1.3;
+    line-height: 1.2;
+    text-align: center;
+    margin: 5px 0;
+    color: #333;
 }
 
 .reqs {
-    font-size: 0.7rem;
+    font-size: 0.6rem;
     color: #999;
-    margin-top: 8px;
+    text-align: center;
     font-style: italic;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
-.state-locked {
-    background-color: var(--locked-bg);
-    color: var(--locked-text);
-    border-color: transparent;
-    cursor: not-allowed;
-    opacity: 0.8;
-}
+/* ESTADOS */
+.state-locked { background-color: var(--locked-bg); color: var(--locked-text); border-color: transparent; cursor: not-allowed; opacity: 0.6; }
+.state-planned { background-color: var(--planned-bg); border-color: var(--planned-border); box-shadow: 0 0 0 1px var(--planned-border); }
+.state-passed { background-color: var(--passed-bg); border-color: var(--passed-border); }
 
-.state-locked:hover {
-    transform: none;
-    box-shadow: none;
-}
-
-.state-planned {
-    background-color: var(--planned-bg);
-    border-color: var(--planned-border);
-}
-
-.state-passed {
-    background-color: var(--passed-bg);
-    border-color: var(--passed-border);
-    opacity: 0.6;
-}
-
-@media (min-width: 1200px) {
-    #grid-container {
-        grid-template-columns: repeat(4, 1fr);
+/* Responsive para móviles: Los niveles se ven mejor apilados verticalmente sin el sidebar lateral */
+@media (max-width: 768px) {
+    .level-row { flex-direction: column; border-right: none; }
+    .level-header { 
+        width: 100%; 
+        border-right: none; 
+        border-bottom: 2px solid #eee; 
+        margin-bottom: 10px; 
+        padding-bottom: 5px;
     }
+    .materia-card { width: 100%; }
 }
