@@ -169,13 +169,16 @@ function renderGrid() {
     container.innerHTML = '';
 
     levels.forEach(level => {
-        const col = document.createElement('div');
-        col.className = 'semester-column';
+        const row = document.createElement('div');
+        row.className = 'level-row';
         
-        const title = document.createElement('div');
-        title.className = 'semester-title';
-        title.innerText = `Nivel ${level}`;
-        col.appendChild(title);
+        const header = document.createElement('div');
+        header.className = 'level-header';
+        header.innerText = `Nivel ${level}`;
+        row.appendChild(header);
+
+        const group = document.createElement('div');
+        group.className = 'materias-group';
 
         const levelMaterias = materias.filter(m => m.level === level);
         
@@ -186,10 +189,9 @@ function renderGrid() {
             card.onclick = () => toggleMateria(m.id);
 
             let reqText = '';
-            if (m.minApproved) reqText += `Req: ${m.minApproved} mat. `;
+            if (m.minApproved) reqText += `> ${m.minApproved} mat. `;
             if (m.reqs.length > 0) reqText += `Pre: ${m.reqs.join(', ')} `;
             if (m.coreq.length > 0) reqText += `Co: ${m.coreq.join(', ')}`;
-            if (m.desc) reqText += `(${m.desc})`;
 
             card.innerHTML = `
                 <div class="materia-header">
@@ -197,12 +199,13 @@ function renderGrid() {
                     <span class="credits">${m.credits} cr</span>
                 </div>
                 <div class="materia-name">${m.name}</div>
-                <div class="reqs">${reqText}</div>
+                <div class="reqs" title="${reqText}">${reqText}</div>
             `;
-            col.appendChild(card);
+            group.appendChild(card);
         });
 
-        container.appendChild(col);
+        row.appendChild(group);
+        container.appendChild(row);
     });
 }
 
