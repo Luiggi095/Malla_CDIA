@@ -92,26 +92,23 @@ h1 {
 .dot.planned { background-color: var(--planned-bg); border: 1px solid var(--planned-border); }
 .dot.passed { background-color: var(--passed-bg); border: 1px solid var(--passed-border); }
 
-/* CONTENEDOR PRINCIPAL VERTICAL */
 #grid-container {
     display: flex;
     flex-direction: column;
-    gap: 20px; /* Espacio entre niveles */
+    gap: 20px;
     padding: 30px;
     max-width: 100%;
-    overflow-x: auto; /* Scroll horizontal si la pantalla es muy pequeña */
+    overflow-x: auto;
 }
 
-/* FILA DE NIVEL */
 .level-row {
     display: flex;
-    align-items: stretch; /* Estirar altura */
+    align-items: stretch;
     background: transparent;
     border-bottom: 1px dashed #d1d1d1;
     padding-bottom: 20px;
 }
 
-/* ENCABEZADO LATERAL (NIVEL 100-I) */
 .level-header {
     width: 120px;
     flex-shrink: 0;
@@ -127,10 +124,9 @@ h1 {
     margin-right: 20px;
 }
 
-/* GRUPO DE MATERIAS (HORIZONTAL) */
 .materias-group {
     display: flex;
-    flex-wrap: wrap; /* Permitir que bajen si no caben en pantalla ancha */
+    flex-wrap: wrap;
     gap: 15px;
     flex-grow: 1;
     align-items: center;
@@ -141,7 +137,7 @@ h1 {
     border: 1px solid var(--available-border);
     border-radius: 6px;
     padding: 10px;
-    width: 180px; /* Ancho fijo más compacto para parecerse al diagrama */
+    width: 180px;
     min-height: 110px;
     cursor: pointer;
     transition: all 0.2s ease;
@@ -187,12 +183,12 @@ h1 {
     text-overflow: ellipsis;
 }
 
-/* ESTADOS */
+
 .state-locked { background-color: var(--locked-bg); color: var(--locked-text); border-color: transparent; cursor: not-allowed; opacity: 0.6; }
 .state-planned { background-color: var(--planned-bg); border-color: var(--planned-border); box-shadow: 0 0 0 1px var(--planned-border); }
 .state-passed { background-color: var(--passed-bg); border-color: var(--passed-border); }
 
-/* Responsive para móviles: Los niveles se ven mejor apilados verticalmente sin el sidebar lateral */
+
 @media (max-width: 768px) {
     .level-row { flex-direction: column; border-right: none; }
     .level-header { 
