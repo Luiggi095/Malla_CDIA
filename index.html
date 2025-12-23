@@ -1,1 +1,41 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Malla Interactiva CDIA - ESPOL</title>
+    <link rel="stylesheet" href="estilos.css">
+</head>
+<body>
+    <header>
+        <div class="header-content">
+            <h1>Ingeniería en Ciencia de Datos e IA</h1>
+            <div class="stats-panel">
+                <div class="stat-box">
+                    <span class="label">Créditos a Tomar:</span>
+                    <span id="credit-count" class="value">0</span>
+                </div>
+                <div class="stat-box">
+                    <span class="label">Estado Matrícula:</span>
+                    <span id="status-msg" class="value status-neutral">Selecciona materias</span>
+                </div>
+                <div class="stat-box">
+                    <span class="label">Avance Carrera:</span>
+                    <span id="progress-percent" class="value">0%</span>
+                </div>
+            </div>
+        </div>
+        <div class="legend">
+            <span class="dot locked"></span> Bloqueada
+            <span class="dot available"></span> Disponible
+            <span class="dot planned"></span> Planificando
+            <span class="dot passed"></span> Aprobada
+        </div>
+    </header>
 
+    <main id="grid-container">
+    </main>
+
+    <script src="script.js"></script>
+</body>
+</html>
